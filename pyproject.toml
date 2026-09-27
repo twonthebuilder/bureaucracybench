@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bureaucracybench"
+version = "0.0.1"
+description = "Research and design foundation for reproducible public-sector prompt evaluation"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {file = "LICENSE"}
+authors = [{name = "BureaucracyBench contributors"}]
+dependencies = []
+
+[project.optional-dependencies]
+validation = ["jsonschema==4.25.1"]
+
+[project.urls]
+Repository = "https://github.com/twonthebuilder/bureaucracybench"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# No CLI entry point until the runner is implemented.
+# Add a tested lockfile with the first runnable release; this is not one.

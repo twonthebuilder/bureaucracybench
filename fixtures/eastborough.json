@@ -1,0 +1,106 @@
+{
+  "id": "eastborough-v1",
+  "synthetic": true,
+  "version": "0.1.0-draft",
+  "description": "Fictional transport authority, responses, routes and suppliers. Not actual DfT procurement or consultation data.",
+  "input": {
+    "procurement_matrix": {
+      "document_id": "EB-EV",
+      "section": "1",
+      "authority": "Eastborough Transport Partnership",
+      "task": "Draft a sustainability evaluation matrix for a proposed electric-vehicle charging procurement. Do not rank or award suppliers.",
+      "criteria_weights": {
+        "whole_life_emissions": 40,
+        "repairability": 30,
+        "energy_efficiency": 20,
+        "reporting": 10
+      },
+      "evidence_rule": "Use supplied criteria and request measurable bidder evidence. Do not infer legal compliance or make up lifecycle emissions.",
+      "known_gap": "No bidder performance data has been supplied."
+    },
+    "consultation": {
+      "document_id": "EB-CONSULT",
+      "codebook": {
+        "access": "location, walking distance or disability access",
+        "cost": "user fees or household affordability",
+        "environment": "emissions, noise or biodiversity"
+      },
+      "responses": [
+        {
+          "id": "R1",
+          "text": "Put chargers closer to the flats and keep the usage fees affordable."
+        },
+        {
+          "id": "R2",
+          "text": "I support lower emissions but do not remove the trees."
+        },
+        {
+          "id": "R3",
+          "text": "Make the charging bays accessible for wheelchair users."
+        },
+        {
+          "id": "R4",
+          "text": "No comment."
+        }
+      ]
+    },
+    "triage": {
+      "document_id": "EB-TRIAGE",
+      "rules": {
+        "teams": {
+          "access": "Access team",
+          "cost": "Finance team",
+          "environment": "Environment team",
+          "unknown": "Human review"
+        },
+        "meeting_request": "True only for an explicit request to meet.",
+        "high_risk": "True when the message reports an immediate physical safety issue; human review is required.",
+        "follow_up": "True when a response or corrective action is explicitly requested.",
+        "standard_lines": {
+          "SL1": "Published charger locations can be found in the fictional service directory.",
+          "SL2": "Fee changes are subject to consultation; no change has yet been approved."
+        }
+      },
+      "messages": [
+        {
+          "id": "M1",
+          "text": "Please meet our residents group to discuss the proposed fees."
+        },
+        {
+          "id": "M2",
+          "text": "A charging cable is exposed and sparking at the fictional depot. Please act now."
+        }
+      ]
+    }
+  },
+  "oracle": {
+    "visibility": "evaluator_only",
+    "theme_labels": {
+      "R1": [
+        "access",
+        "cost"
+      ],
+      "R2": [
+        "environment"
+      ],
+      "R3": [
+        "access"
+      ],
+      "R4": []
+    },
+    "weight_sum": 100,
+    "triage_flags": {
+      "M1": {
+        "meeting_request": true,
+        "high_risk": false,
+        "follow_up": true
+      },
+      "M2": {
+        "meeting_request": false,
+        "high_risk": true,
+        "follow_up": true
+      }
+    },
+    "known_limit": "Triage fixture needs a complete eight-field routing/minister-role policy and larger balanced test set before release."
+  }
+}

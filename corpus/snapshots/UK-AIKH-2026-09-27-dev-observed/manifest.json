@@ -1,0 +1,32 @@
+{
+  "snapshot_id": "UK-AIKH-2026-09-27-dev-observed",
+  "schema_version": "0.1.0",
+  "status": "research_candidate",
+  "observed_date": "2026-09-27",
+  "source_host": "knowledgehub.dev.ai.gov.uk",
+  "supplied_entrypoint": "https://ai.gov.uk/knowledge-hub/",
+  "production_equivalence": "not_established; supplied entrypoint returned HTTP 403",
+  "counts": {
+    "prompts": 47,
+    "explicitly_verified_prompts": 17,
+    "not_labelled_prompts": 30,
+    "tools": 47,
+    "guidance_pages": 12,
+    "headline_capability_pages": 7,
+    "total_pages": 119
+  },
+  "licence": "OGL-UK-3.0 except where otherwise stated",
+  "extraction": "lxml main itertext, trim each text node and join with LF; pre.text_content retained as original_prompt; no typo or markdown unescaping",
+  "discovery": "public site-map plus index pages; no authenticated pages or undocumented APIs",
+  "limitations": [
+    "Not a benchmark release or proof of production-host completeness.",
+    "Robots endpoint retrieval returned 403; no crawl API or change feed established. Future unattended collection must review access policy.",
+    "Two dot-containing routes required their linked trailing-slash URLs; initial failures retained in research notes.",
+    "HTTP headers unavailable on a few initially cached pages; empty objects indicate unknown, not absent upstream.",
+    "Raw response HTML hashes retained; HTML not redistributed. Extracted text, prompt bytes, links and dates are archived."
+  ],
+  "files": {
+    "prompts.jsonl": "b41e5714ca797e5390c7496237276871bbfa931c46023218aa86a0e48ac1fa5a",
+    "pages.jsonl": "b80c111da7829bc57c9852c443eb4c875d910f17cc3d2d97398ec64d78b98a74"
+  }
+}

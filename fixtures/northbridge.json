@@ -1,0 +1,176 @@
+{
+  "id": "northbridge-v1",
+  "synthetic": true,
+  "version": "0.1.0-draft",
+  "description": "Entirely fictional English local authority; no real people, suppliers or procurement decision.",
+  "input": {
+    "schedule": {
+      "document_id": "NB-SCHEDULE",
+      "section": "1",
+      "project": "Northbridge digital permits pilot",
+      "calendar": "Elapsed working-day offsets from day 0; finish-to-start dependencies; no holidays or resource contention; a task of duration n starting at s finishes at s+n.",
+      "tasks": [
+        {
+          "id": "A",
+          "name": "Approve scope",
+          "duration_days": 2,
+          "predecessors": [],
+          "owner": "Service owner"
+        },
+        {
+          "id": "B",
+          "name": "Configure service",
+          "duration_days": 4,
+          "predecessors": [
+            "A"
+          ],
+          "owner": "Digital team"
+        },
+        {
+          "id": "C",
+          "name": "Prepare training",
+          "duration_days": 3,
+          "predecessors": [
+            "A"
+          ],
+          "owner": "Change team"
+        },
+        {
+          "id": "D",
+          "name": "Integration test",
+          "duration_days": 2,
+          "predecessors": [
+            "B"
+          ],
+          "owner": "Test team"
+        },
+        {
+          "id": "E",
+          "name": "User readiness review",
+          "duration_days": 2,
+          "predecessors": [
+            "C",
+            "D"
+          ],
+          "owner": "Service owner"
+        },
+        {
+          "id": "F",
+          "name": "Pilot launch",
+          "duration_days": 1,
+          "predecessors": [
+            "E"
+          ],
+          "owner": "Delivery lead"
+        }
+      ],
+      "constraints": [
+        "No task can start before its predecessors finish.",
+        "No additional staff, shorter task durations or parallel dependent tasks have been approved.",
+        "Funding for contingency is not yet decided."
+      ]
+    },
+    "procurement": {
+      "document_id": "NB-PROC",
+      "section": "1",
+      "project": "Northbridge digital permits service",
+      "jurisdiction": "Fictional local authority in England",
+      "decision_date": "2026-09-27",
+      "scope": "Hosted permit application software and migration support; non-clinical administrative service",
+      "estimated_contract_value_gbp_including_vat": 240000,
+      "contract_years": 3,
+      "timeline": "Desired pilot in 9 months; no statutory emergency asserted",
+      "constraints": [
+        "No existing framework availability has been confirmed.",
+        "Accessibility and data retention requirements must be assessed.",
+        "Commercial and legal colleagues must confirm applicable regime, thresholds, transition rules and approvals."
+      ],
+      "funding": "Budget ceiling approved internally for planning; no award approved",
+      "missing_information": [
+        "Supplier market capacity",
+        "Whether any framework covers this requirement",
+        "Final data-protection assessment",
+        "Applicable procurement reference packet"
+      ]
+    },
+    "business_case": {
+      "document_id": "NB-CASE",
+      "sections": {
+        "strategic": "Reduce fictional permit processing backlog; preserve assisted access.",
+        "economic": "Options: do minimum, improve existing process, new digital service. Benefits valuation is not yet established.",
+        "commercial": "Procurement route not yet selected.",
+        "financial": "Planning ceiling £240000 over three years; no confirmed discounted benefits.",
+        "management": "Service owner accountable; delivery lead manages work; go-live requires test and readiness evidence."
+      }
+    },
+    "governance": {
+      "document_id": "NB-GOV",
+      "roles": [
+        "Service owner",
+        "Delivery lead",
+        "Digital team",
+        "Change team",
+        "Commercial lead"
+      ],
+      "fixture_convention": "Exactly one Accountable role per activity; at least one Responsible role. This is the fictional programme convention.",
+      "financial_thresholds": "Delivery lead may approve scope changes up to £5000 within approved budget; above that goes to service owner and finance board.",
+      "word_limit": 500
+    }
+  },
+  "oracle": {
+    "visibility": "evaluator_only",
+    "schedule": {
+      "earliest_start": {
+        "A": 0,
+        "B": 2,
+        "C": 2,
+        "D": 6,
+        "E": 8,
+        "F": 10
+      },
+      "earliest_finish": {
+        "A": 2,
+        "B": 6,
+        "C": 5,
+        "D": 8,
+        "E": 10,
+        "F": 11
+      },
+      "critical_paths": [
+        [
+          "A",
+          "B",
+          "D",
+          "E",
+          "F"
+        ]
+      ],
+      "project_duration_days": 11,
+      "total_float_days": {
+        "A": 0,
+        "B": 0,
+        "C": 1,
+        "D": 0,
+        "E": 0,
+        "F": 0
+      }
+    },
+    "procurement": {
+      "required_initial_questions": [
+        "nature of procurement",
+        "estimated value",
+        "timeline",
+        "constraints"
+      ],
+      "unsupported_claims": [
+        "A supplier/framework is available without evidence",
+        "A named procurement threshold or mandatory route without matching authoritative reference",
+        "Funding approval means contract award approval"
+      ],
+      "material_unknowns": [
+        "applicable reference packet",
+        "framework availability"
+      ]
+    }
+  }
+}

@@ -1,0 +1,350 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/twonthebuilder/bureaucracybench/schemas/case.schema.json",
+  "title": "case.schema.json",
+  "description": "Draft contract; version 0.1.0-draft. Cross-record invariants require loader validation.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0-draft"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^BB-[A-Z]+-[0-9]{3}$"
+    },
+    "revision": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "released",
+        "retired"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "snapshot_id": {
+          "type": "string"
+        },
+        "prompt_id": {
+          "type": "string"
+        },
+        "prompt_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "verification_status": {
+          "enum": [
+            "verified",
+            "not_labelled",
+            "unknown",
+            "conflicting"
+          ]
+        }
+      },
+      "required": [
+        "snapshot_id",
+        "prompt_id",
+        "prompt_sha256",
+        "url",
+        "verification_status"
+      ],
+      "additionalProperties": false
+    },
+    "variant": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "faithful",
+            "adapted",
+            "persona_ablation",
+            "framework_rewrite",
+            "reconstruction"
+          ]
+        },
+        "changes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "changes"
+      ],
+      "additionalProperties": false
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "proposed_suites": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "difficulty": {
+      "type": "string"
+    },
+    "required_capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "fixtures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "input_key": {
+            "type": "string"
+          },
+          "oracle_visibility": {
+            "const": "evaluator_only"
+          }
+        },
+        "required": [
+          "path",
+          "sha256",
+          "input_key",
+          "oracle_visibility"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "bindings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "literal": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "expected_occurrences": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "literal",
+          "value",
+          "expected_occurrences"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "rendering": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "attachment_mode": {
+          "enum": [
+            "attachments_at_start",
+            "scripted_after_request"
+          ]
+        },
+        "system_message": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "instructions": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "version",
+        "attachment_mode",
+        "system_message",
+        "instructions"
+      ],
+      "additionalProperties": false
+    },
+    "interaction": {
+      "type": "object",
+      "properties": {
+        "max_model_turns": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "policy": {
+          "enum": [
+            "single_response",
+            "fixed_user_script"
+          ]
+        },
+        "user_turns": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "after_model_turn": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "message_prefix": {
+                "type": "string"
+              },
+              "fixture_input": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  },
+                  "input_key": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "path",
+                  "input_key"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "after_model_turn",
+              "message_prefix",
+              "fixture_input"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "stop_rule": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "max_model_turns",
+        "policy",
+        "user_turns",
+        "stop_rule"
+      ],
+      "additionalProperties": false
+    },
+    "expected_behavior": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evaluators": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "dimension": {
+            "enum": [
+              "instruction_following",
+              "task_completion",
+              "factual_grounding",
+              "framework_conformity",
+              "completeness",
+              "unsupported_assertions",
+              "uncertainty",
+              "persona_adherence"
+            ]
+          },
+          "method": {
+            "enum": [
+              "deterministic",
+              "reference",
+              "human_rubric",
+              "optional_llm_judge"
+            ]
+          },
+          "criterion": {
+            "type": "string"
+          },
+          "anchors": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "implemented": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "dimension",
+          "method",
+          "criterion",
+          "anchors",
+          "implemented"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "release_blockers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "revision",
+    "status",
+    "title",
+    "source",
+    "variant",
+    "tags",
+    "proposed_suites",
+    "difficulty",
+    "required_capabilities",
+    "fixtures",
+    "bindings",
+    "rendering",
+    "interaction",
+    "expected_behavior",
+    "evaluators",
+    "release_blockers"
+  ],
+  "additionalProperties": false
+}

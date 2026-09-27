@@ -1,0 +1,21 @@
+{
+  "schema_version": "0.1.0-draft",
+  "status": "planned",
+  "released_case_ids": [],
+  "selection_rules": {
+    "full": "All released cases; emit compatibility skips with reasons.",
+    "verified": "Released faithful cases with explicit verified source status in pinned snapshot.",
+    "prompt-library": "Released cases with prompt-page provenance; expose adaptation kind.",
+    "personas": "Registered matched role ablations; no inherited government verification.",
+    "frameworks": "Registered matched framework experiments.",
+    "use-cases": "Released reconstructions with documented source-tool links.",
+    "capability": "Exact upstream category filter; preserve Learning and development.",
+    "family": "Project-authored family tags, e.g. procurement, risk, writing."
+  },
+  "draft_case_ids": [
+    "BB-GANTT-001",
+    "BB-BRIEFING-001",
+    "BB-SIMPLIFY-001",
+    "BB-PROCUREMENT-001"
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/twonthebuilder/bureaucracybench/schemas/model-profile.schema.json",
+  "title": "model-profile.schema.json",
+  "description": "Draft contract; version 0.1.0-draft. Cross-record invariants require loader validation.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0-draft"
+    },
+    "profile_id": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "api_surface": {
+      "enum": [
+        "openai_chat",
+        "openai_responses",
+        "anthropic_messages",
+        "google_generate_content",
+        "fake"
+      ]
+    },
+    "base_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "api_key_env": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[A-Z][A-Z0-9_]*$"
+    },
+    "model": {
+      "type": "string"
+    },
+    "model_revision": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "deployment": {
+      "enum": [
+        "local",
+        "hosted",
+        "test"
+      ]
+    },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "temperature": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "top_p": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "max_output_tokens": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "seed": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "reasoning": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "provider_options": {
+          "type": "object"
+        },
+        "timeout_seconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "temperature",
+        "top_p",
+        "max_output_tokens",
+        "seed",
+        "reasoning",
+        "provider_options",
+        "timeout_seconds"
+      ],
+      "additionalProperties": false
+    },
+    "capabilities": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "boolean"
+        },
+        "chat": {
+          "type": "boolean"
+        },
+        "supported_settings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "conformance_status": {
+          "enum": [
+            "untested",
+            "mock_tested",
+            "live_tested"
+          ]
+        }
+      },
+      "required": [
+        "text",
+        "chat",
+        "supported_settings",
+        "conformance_status"
+      ],
+      "additionalProperties": false
+    },
+    "local_metadata": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "runtime": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "runtime_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "weight_source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "weight_revision": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "weight_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "quantization": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "chat_template_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "context_tokens": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "hardware": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "profile_id",
+    "provider",
+    "api_surface",
+    "base_url",
+    "api_key_env",
+    "model",
+    "model_revision",
+    "deployment",
+    "settings",
+    "capabilities",
+    "local_metadata"
+  ],
+  "additionalProperties": false
+}

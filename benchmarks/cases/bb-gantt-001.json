@@ -1,0 +1,118 @@
+{
+  "schema_version": "0.1.0-draft",
+  "id": "BB-GANTT-001",
+  "revision": "0.1.0-draft",
+  "status": "draft",
+  "title": "Plan the Northbridge permit pilot",
+  "source": {
+    "snapshot_id": "UK-AIKH-2026-09-27-dev-observed",
+    "prompt_id": "khp:create-a-gantt-style-project-schedule",
+    "prompt_sha256": "fcecd4dc5dbb0e8fcb504a70944c41da4d629b9908c8bb288c0e8d314eee2a77",
+    "url": "https://knowledgehub.dev.ai.gov.uk/prompts/create-a-gantt-style-project-schedule",
+    "verification_status": "verified"
+  },
+  "variant": {
+    "id": "faithful-instantiation",
+    "kind": "faithful",
+    "changes": [
+      "Declared literal placeholder substitution and standardized document transport only."
+    ]
+  },
+  "tags": [
+    "planning",
+    "Create and review documents"
+  ],
+  "proposed_suites": [
+    "prompt-library",
+    "verified"
+  ],
+  "difficulty": "baseline",
+  "required_capabilities": [
+    "text",
+    "chat"
+  ],
+  "fixtures": [
+    {
+      "path": "fixtures/northbridge.json",
+      "sha256": "6a48c19f5d2d0684db1cab49345190d8ec4781b0936cf3a7f7ab74146a91530e",
+      "input_key": "schedule",
+      "oracle_visibility": "evaluator_only"
+    }
+  ],
+  "bindings": [
+    {
+      "literal": "\\[DESCRIBE YOUR PROGRAMME]",
+      "value": "Northbridge digital permits pilot",
+      "expected_occurrences": 1
+    },
+    {
+      "literal": "[PROGRAMME DETAILS]",
+      "value": "See NB-SCHEDULE section 1 in the attached synthetic document.",
+      "expected_occurrences": 1
+    }
+  ],
+  "rendering": {
+    "version": "literal-v0",
+    "attachment_mode": "attachments_at_start",
+    "system_message": null,
+    "instructions": "See docs/architecture.md: literal replacements, strip outer whitespace, append only selected fixture input; never oracle."
+  },
+  "interaction": {
+    "max_model_turns": 1,
+    "policy": "single_response",
+    "user_turns": [],
+    "stop_rule": "Stop after final allowed model response; record early drafting and unanswered questions, do not regenerate."
+  },
+  "expected_behavior": [
+    "Earliest completion 11 working days; critical chain A-B-D-E-F.",
+    "No claim that contingency funding is approved.",
+    "Accept a text Gantt-style schedule; graphical image generation not required."
+  ],
+  "evaluators": [
+    {
+      "id": "schedule-feasibility",
+      "version": "0.1.0-draft",
+      "dimension": "task_completion",
+      "method": "deterministic",
+      "criterion": "All six tasks retain durations/owners; start at or after every predecessor finish; do not invent capacity.",
+      "anchors": null,
+      "implemented": false
+    },
+    {
+      "id": "critical-path",
+      "version": "0.1.0-draft",
+      "dimension": "factual_grounding",
+      "method": "reference",
+      "criterion": "Calculate earliest completion and all zero-float paths from NB-SCHEDULE; accept equivalent representation.",
+      "anchors": null,
+      "implemented": false
+    },
+    {
+      "id": "schedule-components",
+      "version": "0.1.0-draft",
+      "dimension": "completeness",
+      "method": "deterministic",
+      "criterion": "WBS, durations, roles, dependencies, critical path, risk analysis, team actions, low-confidence areas and information needs.",
+      "anchors": null,
+      "implemented": false
+    },
+    {
+      "id": "schedule-risk-quality",
+      "version": "0.1.0-draft",
+      "dimension": "framework_conformity",
+      "method": "human_rubric",
+      "criterion": "Specific risks and appropriate owners/contingencies grounded in this schedule.",
+      "anchors": {
+        "0": "Misses constraints or invents slack.",
+        "1": "Generic risks only.",
+        "2": "Finds zero-slack chain; actions or ownership incomplete.",
+        "3": "Grounded critical-chain risks with correct teams, feasible next actions and explicit contingency-funding uncertainty."
+      },
+      "implemented": false
+    }
+  ],
+  "release_blockers": [
+    "Implement and adversarially test schedule evaluator.",
+    "Independent rubric review; source-host scope review."
+  ]
+}

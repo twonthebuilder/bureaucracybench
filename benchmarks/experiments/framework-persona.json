@@ -1,0 +1,83 @@
+{
+  "id": "BB-EXP-FRAMEWORK-001",
+  "revision": "0.1.0-draft",
+  "status": "draft",
+  "source_kind": "guidance_derived_experiment",
+  "source_url": "https://knowledgehub.dev.ai.gov.uk/how-to/experiment-with-prompts",
+  "snapshot_id": "UK-AIKH-2026-09-27-dev-observed",
+  "government_verified": false,
+  "estimand": "Effect of packaging at fixed information content, conditional on persona presence. Persona-absent CRIT/PICSE are explicit ablations, not complete original frameworks.",
+  "common_blocks": {
+    "role": "You are a procurement adviser specialising in sustainability assessment.",
+    "context": "Eastborough Transport Partnership is planning electric-vehicle charging infrastructure. This is a fictional benchmark scenario.",
+    "intent": "Draft a sustainability scoring matrix for supplier bids. Do not rank suppliers or recommend an award.",
+    "criteria": "Use criteria and weights exactly as supplied. Include criteria, weightings, measurable bidder evidence and evaluation notes in a table. State missing information; do not invent performance or legal requirements.",
+    "sources": "Use EB-EV section 1: whole-life emissions 40%, repairability 30%, energy efficiency 20%, reporting 10%. No bidder performance data is supplied.",
+    "example": "Format-only example: criterion | weight | evidence requested | evaluation note. Do not add an extra scored criterion from this example."
+  },
+  "variants": [
+    {
+      "id": "plain-persona-present",
+      "framework": "plain",
+      "persona": "present",
+      "prompt": "You are a procurement adviser specialising in sustainability assessment.\n\nEastborough Transport Partnership is planning electric-vehicle charging infrastructure. This is a fictional benchmark scenario.\n\nDraft a sustainability scoring matrix for supplier bids. Do not rank suppliers or recommend an award.\n\nUse criteria and weights exactly as supplied. Include criteria, weightings, measurable bidder evidence and evaluation notes in a table. State missing information; do not invent performance or legal requirements.\n\nUse EB-EV section 1: whole-life emissions 40%, repairability 30%, energy efficiency 20%, reporting 10%. No bidder performance data is supplied.\n\nFormat-only example: criterion | weight | evidence requested | evaluation note. Do not add an extra scored criterion from this example.",
+      "sha256": "d8961af8698a4669139e425ec101fee3eedf1177338f9724237d9fdcbadbf01a"
+    },
+    {
+      "id": "crit-persona-present",
+      "framework": "CRIT",
+      "persona": "present",
+      "prompt": "// Context\nEastborough Transport Partnership is planning electric-vehicle charging infrastructure. This is a fictional benchmark scenario.\n\nUse EB-EV section 1: whole-life emissions 40%, repairability 30%, energy efficiency 20%, reporting 10%. No bidder performance data is supplied.\n\n// Role\nYou are a procurement adviser specialising in sustainability assessment.\n\n// Intent\nDraft a sustainability scoring matrix for supplier bids. Do not rank suppliers or recommend an award.\n\n// Type of output\nUse criteria and weights exactly as supplied. Include criteria, weightings, measurable bidder evidence and evaluation notes in a table. State missing information; do not invent performance or legal requirements.\n\nFormat-only example: criterion | weight | evidence requested | evaluation note. Do not add an extra scored criterion from this example.",
+      "sha256": "5dbbaea64c481ad4d046335d02d3af5595ed58f5f37e5f1be60b71b5d662237c"
+    },
+    {
+      "id": "picse-persona-present",
+      "framework": "PICSE",
+      "persona": "present",
+      "prompt": "// Persona\nYou are a procurement adviser specialising in sustainability assessment.\n\n// Intention\nEastborough Transport Partnership is planning electric-vehicle charging infrastructure. This is a fictional benchmark scenario.\n\nDraft a sustainability scoring matrix for supplier bids. Do not rank suppliers or recommend an award.\n\n// Criteria\nUse criteria and weights exactly as supplied. Include criteria, weightings, measurable bidder evidence and evaluation notes in a table. State missing information; do not invent performance or legal requirements.\n\n// Sources\nUse EB-EV section 1: whole-life emissions 40%, repairability 30%, energy efficiency 20%, reporting 10%. No bidder performance data is supplied.\n\n// Examples\nFormat-only example: criterion | weight | evidence requested | evaluation note. Do not add an extra scored criterion from this example.",
+      "sha256": "5dd67241c3786635d14f573c64ff87b4b4e8a4b4156fea82d4473fc9e75748a6"
+    },
+    {
+      "id": "plain-persona-absent",
+      "framework": "plain",
+      "persona": "absent",
+      "prompt": "Eastborough Transport Partnership is planning electric-vehicle charging infrastructure. This is a fictional benchmark scenario.\n\nDraft a sustainability scoring matrix for supplier bids. Do not rank suppliers or recommend an award.\n\nUse criteria and weights exactly as supplied. Include criteria, weightings, measurable bidder evidence and evaluation notes in a table. State missing information; do not invent performance or legal requirements.\n\nUse EB-EV section 1: whole-life emissions 40%, repairability 30%, energy efficiency 20%, reporting 10%. No bidder performance data is supplied.\n\nFormat-only example: criterion | weight | evidence requested | evaluation note. Do not add an extra scored criterion from this example.",
+      "sha256": "12d4f5792681ffea452d2895ae954f88ca0bcf1575bad243573659432ed82828"
+    },
+    {
+      "id": "crit-persona-absent",
+      "framework": "CRIT",
+      "persona": "absent",
+      "prompt": "// Context\nEastborough Transport Partnership is planning electric-vehicle charging infrastructure. This is a fictional benchmark scenario.\n\nUse EB-EV section 1: whole-life emissions 40%, repairability 30%, energy efficiency 20%, reporting 10%. No bidder performance data is supplied.\n\n// Intent\nDraft a sustainability scoring matrix for supplier bids. Do not rank suppliers or recommend an award.\n\n// Type of output\nUse criteria and weights exactly as supplied. Include criteria, weightings, measurable bidder evidence and evaluation notes in a table. State missing information; do not invent performance or legal requirements.\n\nFormat-only example: criterion | weight | evidence requested | evaluation note. Do not add an extra scored criterion from this example.",
+      "sha256": "df015818f3d5e406394f8a8205b64e047f46c1334735845f84bb7edb6339412a"
+    },
+    {
+      "id": "picse-persona-absent",
+      "framework": "PICSE",
+      "persona": "absent",
+      "prompt": "// Intention\nEastborough Transport Partnership is planning electric-vehicle charging infrastructure. This is a fictional benchmark scenario.\n\nDraft a sustainability scoring matrix for supplier bids. Do not rank suppliers or recommend an award.\n\n// Criteria\nUse criteria and weights exactly as supplied. Include criteria, weightings, measurable bidder evidence and evaluation notes in a table. State missing information; do not invent performance or legal requirements.\n\n// Sources\nUse EB-EV section 1: whole-life emissions 40%, repairability 30%, energy efficiency 20%, reporting 10%. No bidder performance data is supplied.\n\n// Examples\nFormat-only example: criterion | weight | evidence requested | evaluation note. Do not add an extra scored criterion from this example.",
+      "sha256": "81ad28315bc6ca5a56fc88af43c0ed2b1b25dffb09170743db57065974e33abb"
+    }
+  ],
+  "repetitions_per_cell": 3,
+  "scenario_ref": "fixtures/eastborough.json#input/procurement_matrix",
+  "primary_metrics": [
+    "grounding",
+    "completeness",
+    "instruction_following"
+  ],
+  "checks": [
+    "Weights remain 40/30/20/10 and sum to 100.",
+    "All four criteria covered; bidder evidence requests are measurable.",
+    "No invented bidder rankings or legal compliance."
+  ],
+  "limitations": [
+    "One development scenario, not a general framework ranking.",
+    "Structure/role may change token counts; record actual tokens.",
+    "No iterative-workflow effect is claimed."
+  ],
+  "release_blockers": [
+    "Implement evaluators and additional independent scenario families.",
+    "Human rubric calibration."
+  ]
+}

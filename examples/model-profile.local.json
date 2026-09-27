@@ -1,0 +1,37 @@
+{
+  "schema_version": "0.1.0-draft",
+  "profile_id": "local/example",
+  "provider": "openai-compatible",
+  "api_surface": "openai_chat",
+  "base_url": "http://127.0.0.1:1234/v1",
+  "api_key_env": null,
+  "model": "REPLACE_WITH_LOADED_MODEL_ID",
+  "model_revision": null,
+  "deployment": "local",
+  "settings": {
+    "temperature": null,
+    "top_p": null,
+    "max_output_tokens": 2048,
+    "seed": null,
+    "reasoning": null,
+    "provider_options": {},
+    "timeout_seconds": 120
+  },
+  "capabilities": {
+    "text": true,
+    "chat": true,
+    "supported_settings": [],
+    "conformance_status": "untested"
+  },
+  "local_metadata": {
+    "runtime": null,
+    "runtime_version": null,
+    "weight_source": null,
+    "weight_revision": null,
+    "weight_sha256": null,
+    "quantization": null,
+    "chat_template_sha256": null,
+    "context_tokens": null,
+    "hardware": {}
+  }
+}

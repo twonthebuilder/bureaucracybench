@@ -1,0 +1,103 @@
+{
+  "schema_version": "0.1.0-draft",
+  "id": "BB-BRIEFING-001",
+  "revision": "0.1.0-draft",
+  "status": "draft",
+  "title": "Brief leaders on the Merefield supply pilot",
+  "source": {
+    "snapshot_id": "UK-AIKH-2026-09-27-dev-observed",
+    "prompt_id": "khp:prepare-for-a-briefing",
+    "prompt_sha256": "af25e47de5cfeb0aef26fd8e8ea1bd87438e2a6d688e7313181ce0a1a5fec074",
+    "url": "https://knowledgehub.dev.ai.gov.uk/prompts/prepare-for-a-briefing",
+    "verification_status": "verified"
+  },
+  "variant": {
+    "id": "faithful-instantiation",
+    "kind": "faithful",
+    "changes": [
+      "Declared literal placeholder substitution and standardized document transport only."
+    ]
+  },
+  "tags": [
+    "briefing",
+    "Create and review documents"
+  ],
+  "proposed_suites": [
+    "prompt-library",
+    "verified"
+  ],
+  "difficulty": "baseline",
+  "required_capabilities": [
+    "text",
+    "chat"
+  ],
+  "fixtures": [
+    {
+      "path": "fixtures/merefield.json",
+      "sha256": "c610a3b5949c59267f25b933c4cf42405da20810e73d68a43e89b5dd8e700d09",
+      "input_key": "pilot_evidence",
+      "oracle_visibility": "evaluator_only"
+    }
+  ],
+  "bindings": [
+    {
+      "literal": "[PROVIDE AVAILABLE DATA OR EXAMPLES]",
+      "value": "Use MF-PILOT sections 1–5 in the attached synthetic evidence packet.",
+      "expected_occurrences": 1
+    }
+  ],
+  "rendering": {
+    "version": "literal-v0",
+    "attachment_mode": "attachments_at_start",
+    "system_message": null,
+    "instructions": "See docs/architecture.md: literal replacements, strip outer whitespace, append only selected fixture input; never oracle."
+  },
+  "interaction": {
+    "max_model_turns": 1,
+    "policy": "single_response",
+    "user_turns": [],
+    "stop_rule": "Stop after final allowed model response; record early drafting and unanswered questions, do not regenerate."
+  },
+  "expected_behavior": [
+    "Financial ROI is not calculable from this packet.",
+    "Source asks whether to adapt for another stakeholder group."
+  ],
+  "evaluators": [
+    {
+      "id": "briefing-structure",
+      "version": "0.1.0-draft",
+      "dimension": "instruction_following",
+      "method": "deterministic",
+      "criterion": "Bulleted summary and four-column benefits table; addresses strategic, operational, financial, risk and scalability areas.",
+      "anchors": null,
+      "implemented": false
+    },
+    {
+      "id": "pilot-facts",
+      "version": "0.1.0-draft",
+      "dimension": "factual_grounding",
+      "method": "reference",
+      "criterion": "Preserve 12-to-9 minutes, sample sizes, one-store/four-week scope; 25% relative reduction if calculated.",
+      "anchors": null,
+      "implemented": false
+    },
+    {
+      "id": "unsupported-roi",
+      "version": "0.1.0-draft",
+      "dimension": "unsupported_assertions",
+      "method": "human_rubric",
+      "criterion": "Do not claim known ROI, net savings, causality or clinical improvement.",
+      "anchors": {
+        "0": "Invents a monetary ROI or clinical outcome.",
+        "1": "Acknowledges some limits but implies general causal savings.",
+        "2": "Avoids fabricated ROI but incompletely identifies missing costs or design limits.",
+        "3": "Clearly separates measured time difference, missing costs and untested scalability; states needed evidence."
+      },
+      "implemented": false
+    }
+  ],
+  "release_blockers": [
+    "Implement structure and fact checks.",
+    "Human rubric calibration and source-host scope review."
+  ]
+}

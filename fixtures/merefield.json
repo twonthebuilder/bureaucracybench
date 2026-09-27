@@ -1,0 +1,61 @@
+{
+  "id": "merefield-v1",
+  "synthetic": true,
+  "version": "0.1.0-draft",
+  "description": "Fictional NHS administrative logistics pilot; no patient data or clinical judgments.",
+  "input": {
+    "pilot_evidence": {
+      "document_id": "MF-PILOT",
+      "sections": {
+        "1_scope": "A four-week pilot of supply-request routing in one fictional hospital store. The aim is to reduce staff administration and retain urgent manual escalation.",
+        "2_method": "The operations team timed 40 synthetic requests before and 40 during the pilot. Samples were not randomized; request mix may differ.",
+        "3_results": "Mean handling time was 12 minutes before and 9 minutes during the pilot. These are sample means, not evidence of system-wide savings.",
+        "4_limits": "Acquisition price, recurring software cost, implementation hours and downstream effects were not measured. No clinical outcomes were evaluated.",
+        "5_safeguards": "A human logistics coordinator reviews urgent flags. Wider rollout requires evaluation and governance approval."
+      }
+    },
+    "notice": {
+      "document_id": "MF-NOTICE",
+      "section": "1",
+      "text": "With effect from 1 November 2026, routine supply requisitions must be submitted through the new portal by 2pm for next-working-day processing. Urgent requirements remain subject to the existing telephone escalation procedure and must not be deferred pending portal processing. The four-week pilot involved one store only. Staff without portal access should contact the stores desk for assistance."
+    }
+  },
+  "oracle": {
+    "visibility": "evaluator_only",
+    "briefing": {
+      "before_minutes": 12,
+      "after_minutes": 9,
+      "absolute_reduction_minutes": 3,
+      "relative_reduction_percent": 25,
+      "per_sample_requests": 40,
+      "scope": "one store; four weeks",
+      "unknown": [
+        "net cash savings",
+        "ROI",
+        "clinical benefits",
+        "generalizable causal effect"
+      ],
+      "requirements": [
+        "separate pilot result from forecast",
+        "retain human urgent review",
+        "avoid invented system-wide outcome"
+      ]
+    },
+    "simplification": {
+      "must_preserve": [
+        "1 November 2026",
+        "2pm cutoff",
+        "next-working-day processing",
+        "urgent telephone escalation remains",
+        "urgent requests must not wait for portal processing",
+        "pilot was one store for four weeks",
+        "stores desk assistance for staff without portal access"
+      ],
+      "do_not_invent": [
+        "weekend delivery promise",
+        "emergency clinical procedure",
+        "guaranteed patient benefit"
+      ]
+    }
+  }
+}

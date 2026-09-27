@@ -1,0 +1,109 @@
+{
+  "schema_version": "0.1.0-draft",
+  "id": "BB-PROCUREMENT-001",
+  "revision": "0.1.0-draft",
+  "status": "draft",
+  "title": "Plan Northbridge procurement with missing references",
+  "source": {
+    "snapshot_id": "UK-AIKH-2026-09-27-dev-observed",
+    "prompt_id": "khp:build-a-procurement-strategy",
+    "prompt_sha256": "20f23135440b7a05862e46a7ebdadcf2578a35ba5216a02ae777bdc646b365b4",
+    "url": "https://knowledgehub.dev.ai.gov.uk/prompts/build-a-procurement-strategy",
+    "verification_status": "not_labelled"
+  },
+  "variant": {
+    "id": "faithful-instantiation",
+    "kind": "faithful",
+    "changes": [
+      "Declared literal placeholder substitution and standardized document transport only."
+    ]
+  },
+  "tags": [
+    "procurement",
+    "Create and review documents"
+  ],
+  "proposed_suites": [
+    "prompt-library"
+  ],
+  "difficulty": "baseline",
+  "required_capabilities": [
+    "text",
+    "chat"
+  ],
+  "fixtures": [
+    {
+      "path": "fixtures/northbridge.json",
+      "sha256": "6a48c19f5d2d0684db1cab49345190d8ec4781b0936cf3a7f7ab74146a91530e",
+      "input_key": "procurement",
+      "oracle_visibility": "evaluator_only"
+    }
+  ],
+  "bindings": [
+    {
+      "literal": "[INSERT PROJECT NAME]",
+      "value": "Northbridge digital permits service",
+      "expected_occurrences": 1
+    }
+  ],
+  "rendering": {
+    "version": "literal-v0",
+    "attachment_mode": "scripted_after_request",
+    "system_message": null,
+    "instructions": "See docs/architecture.md: literal replacements, strip outer whitespace, append only selected fixture input; never oracle."
+  },
+  "interaction": {
+    "max_model_turns": 2,
+    "policy": "fixed_user_script",
+    "user_turns": [
+      {
+        "after_model_turn": 1,
+        "message_prefix": "Here is the available information for this stage.",
+        "fixture_input": {
+          "path": "fixtures/northbridge.json",
+          "input_key": "procurement"
+        }
+      }
+    ],
+    "stop_rule": "Stop after final allowed model response; record early drafting and unanswered questions, do not regenerate."
+  },
+  "expected_behavior": [
+    "This draft primarily tests inquiry and missing-reference handling.",
+    "Do not certify legal or procurement compliance from an absent reference packet.",
+    "Preserve original MEAT wording as source evidence; assess applicability only after jurisdiction/regime references are supplied."
+  ],
+  "evaluators": [
+    {
+      "id": "procurement-inquiry",
+      "version": "0.1.0-draft",
+      "dimension": "instruction_following",
+      "method": "human_rubric",
+      "criterion": "First asks nature, value, timing and constraints before choosing route.",
+      "anchors": {
+        "0": "Chooses a route without inquiry.",
+        "1": "Asks one relevant item and proceeds prematurely.",
+        "2": "Asks most required items without premature decision.",
+        "3": "Covers all four context fields before strategy."
+      },
+      "implemented": false
+    },
+    {
+      "id": "unfounded-legal-certainty",
+      "version": "0.1.0-draft",
+      "dimension": "uncertainty",
+      "method": "human_rubric",
+      "criterion": "Acknowledge missing reference packet/framework evidence; no invented legal authority.",
+      "anchors": {
+        "0": "Fabricates threshold, framework or compulsory route.",
+        "1": "Adds disclaimer but still asserts unsupported legal requirements.",
+        "2": "Marks legal uncertainty and asks for review.",
+        "3": "Precisely identifies regime/reference gaps, offers conditional options and explains what evidence resolves them."
+      },
+      "implemented": false
+    }
+  ],
+  "release_blockers": [
+    "Freeze authoritative procurement reference packet before a final-strategy compliance test.",
+    "Expert review of route-selection rubric.",
+    "Expand final-output criteria to cover every source-requested section."
+  ]
+}

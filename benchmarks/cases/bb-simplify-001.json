@@ -1,0 +1,110 @@
+{
+  "schema_version": "0.1.0-draft",
+  "id": "BB-SIMPLIFY-001",
+  "revision": "0.1.0-draft",
+  "status": "draft",
+  "title": "Rewrite the Merefield supply notice",
+  "source": {
+    "snapshot_id": "UK-AIKH-2026-09-27-dev-observed",
+    "prompt_id": "khp:simplify-complex-writing",
+    "prompt_sha256": "589e87d922690ac08dbeb9ab92190ef69ce1ec3783398d7e9c0aa6f35fdcfbfb",
+    "url": "https://knowledgehub.dev.ai.gov.uk/prompts/simplify-complex-writing",
+    "verification_status": "not_labelled"
+  },
+  "variant": {
+    "id": "faithful-instantiation",
+    "kind": "faithful",
+    "changes": [
+      "Declared literal placeholder substitution and standardized document transport only."
+    ]
+  },
+  "tags": [
+    "writing",
+    "Create and review documents"
+  ],
+  "proposed_suites": [
+    "prompt-library"
+  ],
+  "difficulty": "baseline",
+  "required_capabilities": [
+    "text",
+    "chat"
+  ],
+  "fixtures": [
+    {
+      "path": "fixtures/merefield.json",
+      "sha256": "c610a3b5949c59267f25b933c4cf42405da20810e73d68a43e89b5dd8e700d09",
+      "input_key": "notice",
+      "oracle_visibility": "evaluator_only"
+    }
+  ],
+  "bindings": [],
+  "rendering": {
+    "version": "literal-v0",
+    "attachment_mode": "scripted_after_request",
+    "system_message": null,
+    "instructions": "See docs/architecture.md: literal replacements, strip outer whitespace, append only selected fixture input; never oracle."
+  },
+  "interaction": {
+    "max_model_turns": 2,
+    "policy": "fixed_user_script",
+    "user_turns": [
+      {
+        "after_model_turn": 1,
+        "message_prefix": "Here is the available information for this stage.",
+        "fixture_input": {
+          "path": "fixtures/merefield.json",
+          "input_key": "notice"
+        }
+      }
+    ],
+    "stop_rule": "Stop after final allowed model response; record early drafting and unanswered questions, do not regenerate."
+  },
+  "expected_behavior": [
+    "No rewrite before source text.",
+    "Any valid simpler wording is acceptable."
+  ],
+  "evaluators": [
+    {
+      "id": "asks-for-text",
+      "version": "0.1.0-draft",
+      "dimension": "instruction_following",
+      "method": "human_rubric",
+      "criterion": "First response requests source text before rewriting.",
+      "anchors": {
+        "0": "Invents a notice or rewrites without input.",
+        "1": "Requests input but also fabricates content.",
+        "2": "Asks for text with avoidable distractions.",
+        "3": "Clearly requests the source text before rewriting."
+      },
+      "implemented": false
+    },
+    {
+      "id": "notice-facts",
+      "version": "0.1.0-draft",
+      "dimension": "factual_grounding",
+      "method": "reference",
+      "criterion": "All seven oracle propositions remain true; preserve urgent exception and cutoff.",
+      "anchors": null,
+      "implemented": false
+    },
+    {
+      "id": "plain-language",
+      "version": "0.1.0-draft",
+      "dimension": "task_completion",
+      "method": "human_rubric",
+      "criterion": "Professional, friendly and understandable without changing obligations.",
+      "anchors": {
+        "0": "Material meaning changes.",
+        "1": "Meaning partly preserved but still opaque.",
+        "2": "Clear with a minor avoidable complexity.",
+        "3": "Clear, concise and complete; no meaning or urgent exception lost."
+      },
+      "implemented": false
+    }
+  ],
+  "release_blockers": [
+    "Implement bounded dialogue and evidence-based factual rubric.",
+    "Independent accessibility/content review."
+  ]
+}
