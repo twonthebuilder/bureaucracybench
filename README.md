@@ -12,6 +12,8 @@ Research observed **47 prompts, including 17 explicitly Verified prompts**, plus
 
 Start with [the research answers](docs/research.md), [all 47 prompt assessments](docs/prompt-inventory.md), and [the implementation roadmap](docs/roadmap.md). Coding agents must read [AGENTS.md](AGENTS.md).
 
+For a reproducible checkout, offline checks and an issue-to-review workflow, see [repository onboarding](docs/repository-onboarding.md).
+
 ## Source corpus and status
 
 The [AI Knowledge Hub](https://knowledgehub.dev.ai.gov.uk/about) shares public-sector tools, practices, prompts and practical guidance. It is not a comprehensive policy authority. The library describes itself as user-submitted; submissions are curated. Its prompt index defines Verified as subject professionals having reviewed and approved a prompt. The 17 observed labeled pages identify Government Project Delivery Professionals as verifying the **approach**. They still require output checks. No reproducible verification protocol, model matrix or error threshold was found.
